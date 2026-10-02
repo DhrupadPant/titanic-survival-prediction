@@ -1,90 +1,132 @@
 # Titanic Survival Prediction
 
-A machine learning classification project that predicts whether a passenger survived the Titanic disaster using passenger demographic and travel information.
+A machine learning classification project that predicts whether a passenger survived the Titanic disaster using demographic and travel-related information.
+
+The project compares **Random Forest** and **Logistic Regression**, using preprocessing pipelines, cross-validation, and hyperparameter tuning.
+
+---
 
 ## Project Overview
 
-This project compares two supervised machine learning algorithms:
+This project demonstrates an end-to-end machine learning classification workflow:
 
-* Random Forest Classifier
-* Logistic Regression
+* Data exploration
+* Train/test splitting
+* Missing-value handling
+* Feature scaling
+* One-hot encoding
+* Machine learning pipelines
+* Stratified cross-validation
+* Hyperparameter tuning with `GridSearchCV`
+* Model evaluation
+* Confusion matrix analysis
+* Feature importance analysis
+* Logistic Regression coefficient analysis
 
-The models use preprocessing pipelines to handle numerical and categorical variables, missing values, feature scaling, and one-hot encoding.
+Two classification algorithms are trained and evaluated:
 
-Hyperparameter tuning is performed using GridSearchCV with stratified 5-fold cross-validation.
+* **Random Forest Classifier**
+* **Logistic Regression**
+
+---
 
 ## Dataset
 
-The project uses the Titanic dataset provided through Seaborn.
+The project uses the **Titanic dataset provided through Seaborn**.
 
-The features used include:
+### Features
 
-* Passenger class (`pclass`)
-* Sex
-* Age
-* Number of siblings/spouses aboard (`sibsp`)
-* Number of parents/children aboard (`parch`)
-* Fare
-* Passenger class category
-* Passenger type (`who`)
-* Adult male indicator
-* Whether the passenger was travelling alone
+The following passenger attributes are used:
 
-The target variable is:
+* `pclass` — Passenger class
+* `sex` — Passenger sex
+* `age` — Passenger age
+* `sibsp` — Number of siblings/spouses aboard
+* `parch` — Number of parents/children aboard
+* `fare` — Passenger fare
+* `class` — Passenger class category
+* `who` — Passenger category
+* `adult_male` — Whether the passenger was an adult male
+* `alone` — Whether the passenger was travelling alone
+
+### Target
 
 ```text
 survived
 ```
 
-where:
+Where:
 
 * `0` = Did not survive
 * `1` = Survived
 
+---
+
 ## Machine Learning Workflow
 
-The project follows this workflow:
+The project follows these steps:
 
 1. Load the Titanic dataset
 2. Examine the target class distribution
-3. Split the dataset into training and testing sets
+3. Split the data into training and testing sets
 4. Identify numerical and categorical features
 5. Handle missing numerical values using median imputation
 6. Handle missing categorical values using most-frequent imputation
 7. Standardize numerical features
 8. One-hot encode categorical features
 9. Build a preprocessing and classification pipeline
-10. Perform hyperparameter tuning using GridSearchCV
-11. Evaluate the model on unseen test data
-12. Generate classification reports
-13. Generate confusion matrices
-14. Analyze feature importance
-15. Train and evaluate Logistic Regression
-16. Compare the two classification approaches
+10. Perform hyperparameter tuning using `GridSearchCV`
+11. Use stratified 5-fold cross-validation
+12. Evaluate the best model on unseen test data
+13. Generate classification reports
+14. Generate confusion matrices
+15. Analyze Random Forest feature importance
+16. Train and evaluate Logistic Regression
+17. Analyze Logistic Regression coefficient magnitudes
 
-## Models
+---
 
-### Random Forest
+# Random Forest
 
-The Random Forest model is tuned using:
+The Random Forest classifier is tuned using:
 
 * Number of estimators
 * Maximum tree depth
 * Minimum samples required for splitting
 
-The model's feature importance scores are also analyzed to identify which variables contributed most to its predictions.
+The model's feature importance scores are visualized to examine which features contributed most strongly to its predictions.
 
-### Logistic Regression
+### Confusion Matrix
 
-Logistic Regression is tuned using:
+![Random Forest Confusion Matrix](outputs/random_forest_confusion_matrix.png)
+
+### Feature Importance
+
+![Random Forest Feature Importance](outputs/random_forest_feature_importance.png)
+
+---
+
+# Logistic Regression
+
+The Logistic Regression model is tuned using:
 
 * Solver
 * Regularization penalty
 * Class weighting
 
-The absolute magnitude of the model coefficients is visualized to examine the relative contribution of the encoded features.
+The magnitude of the model coefficients is visualized to examine the relative contribution of the encoded features.
 
-## Evaluation
+### Confusion Matrix
+
+![Logistic Regression Confusion Matrix](outputs/logistic_regression_confusion_matrix.png)
+
+### Coefficient Magnitudes
+
+![Logistic Regression Coefficients](outputs/logistic_regression_coefficients.png)
+
+---
+
+## Model Evaluation
 
 The models are evaluated using:
 
@@ -94,7 +136,23 @@ The models are evaluated using:
 * F1-score
 * Confusion matrix
 
-The test set is kept separate from model training and hyperparameter tuning.
+The test set is kept separate from model training and hyperparameter tuning to evaluate performance on unseen data.
+
+---
+
+## Project Outputs
+
+The generated visualizations are stored in the `outputs/` directory:
+
+```text
+outputs/
+├── random_forest_confusion_matrix.png
+├── random_forest_feature_importance.png
+├── logistic_regression_confusion_matrix.png
+└── logistic_regression_coefficients.png
+```
+
+---
 
 ## Project Structure
 
@@ -112,6 +170,8 @@ titanic-survival-prediction/
 └── .gitignore
 ```
 
+---
+
 ## Installation
 
 Clone the repository:
@@ -121,7 +181,7 @@ git clone https://github.com/YOUR-USERNAME/titanic-survival-prediction.git
 cd titanic-survival-prediction
 ```
 
-Install the required packages:
+Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -133,7 +193,13 @@ Run the project:
 python titanic_survival_prediction.py
 ```
 
-## Technologies Used
+The Titanic dataset is loaded automatically through Seaborn when the program runs.
+
+---
+
+## Requirements
+
+The project uses:
 
 * Python
 * NumPy
@@ -142,9 +208,13 @@ python titanic_survival_prediction.py
 * Seaborn
 * Scikit-learn
 
+Dependencies are listed in `requirements.txt`.
+
+---
+
 ## Key Concepts Demonstrated
 
-This project demonstrates practical use of:
+This project demonstrates practical applications of:
 
 * Data preprocessing
 * Missing-value imputation
@@ -152,10 +222,19 @@ This project demonstrates practical use of:
 * One-hot encoding
 * Train/test splitting
 * Machine learning pipelines
-* Cross-validation
+* Stratified cross-validation
 * Hyperparameter tuning
 * Random Forest classification
 * Logistic Regression
-* Model evaluation
-* Feature importance analysis
+* Classification metrics
 * Confusion matrices
+* Feature importance
+* Model coefficient analysis
+
+---
+
+## Author
+
+**Dhrupad Pant**
+
+GitHub: [DhrupadPant](https://github.com/DhrupadPant)
